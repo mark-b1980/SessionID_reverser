@@ -124,6 +124,7 @@ for timestamp in range(start_timestamp, end_timestamp + 1):
                     print(f"{Fore.GREEN}{res}{Style.RESET_ALL}\n")
                     sys.exit(0)
 
-print(f"{Fore.RED}TESTING ... DONE, no matching session ID found.{Style.RESET_ALL}")
+print(f"TESTING ... DONE! \n\n{Fore.RED}No matching session ID found :({Style.RESET_ALL}")
+print()
 sys.exit(1)
 
