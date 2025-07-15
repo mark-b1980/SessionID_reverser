@@ -62,7 +62,8 @@ def check_hashes(session_id):
 
 # List all available algorithms in hashlib
 ALLOWED_HASHES = hashlib.algorithms_available
-print(ASCII_ART, end="\n\n")
+print(ASCII_ART)
+print()
 
 # Get potential values forming the session ID
 user_id = input(f"Enter the user ID: ").strip()
@@ -75,6 +76,7 @@ print()
 
 # Get the target SessionID to match
 target_hash = input(f"Enter the searched SessionID to match: ").strip()
+print()
 
 # All petential delimiters for the session ID
 delimiters = ", ; . : - _ / \\ ! § $ % & ( ) [ ] { } = ? ' \" + * # @ ~ ^ < > |".split(" ")
@@ -85,15 +87,42 @@ for timestamp in range(start_timestamp, end_timestamp + 1):
     print(f"TESTING # {timestamp}", end="\r")
     sys.stdout.flush()
 
-    vals = [user_id, user_name, user_email, str(timestamp)]
-    for delimiter in delimiters:
-        for perm in permutations(vals):
-            session_id = delimiter.join(perm)
+    # Create a list of all value combinations to permute
+    all_vals = [] 
+    tmp = [user_id, user_name, user_email, str(timestamp)]
 
-            res = check_hashes(session_id)
-            if res:
-                print(f"{Fore.GREEN}{res}{Style.RESET_ALL}\n")
-                sys.exit(0)
+    # Single values
+    all_vals.append([user_id])
+    all_vals.append([user_name])
+    all_vals.append([user_email])
+    all_vals.append([str(timestamp)])
+    
+    # Combinations of two values
+    for i in range(len(tmp)):
+        for j in range(len(tmp)):
+            if i != j:
+                all_vals.append([tmp[i], tmp[j]])
+
+    # Combinations of three values
+    for i in range(len(tmp)):
+        for j in range(len(tmp)):
+            for k in range(len(tmp)):
+                if i != j and j != k and i != k:
+                    all_vals.append([tmp[i], tmp[j], tmp[k]])
+
+    # All four values together
+    all_vals.append(tmp)
+
+    # Test all permutations of all value combinations with all delimiters
+    for vals in all_vals:
+        for delimiter in delimiters:
+            for perm in permutations(vals):
+                session_id = delimiter.join(perm)
+
+                res = check_hashes(session_id)
+                if res:
+                    print(f"{Fore.GREEN}{res}{Style.RESET_ALL}\n")
+                    sys.exit(0)
 
 print(f"{Fore.RED}TESTING ... DONE, no matching session ID found.{Style.RESET_ALL}")
 sys.exit(1)

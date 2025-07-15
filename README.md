@@ -30,3 +30,28 @@ Enter the searched SessionID to match: db54992fbd2c066d1dc31c7b325ecfc8244a3a81
 
 Found matching session ID: sha1("admin|1|987|ad@min.net") == db54992fbd2c066d1dc31c7b325ecfc8244a3a81
 ```
+
+Example 2:
+
+
+```
+ (                         (   (
+ )\ )                      )\ ))\ )
+(()/(   (      (          (()/(()/(    (     (   )     (  (        (  (
+ /(_)) ))\(  ( )\  (   (   /(_))(_))   )(   ))\ /((   ))\ )(  (   ))\ )(
+(_))  /((_)\ )((_) )\  )\ |_))(_))_   (()\ /((_|_))\ /((_|()\ )\ /((_|()\
+/ __|(_))((_|(_|_)((_)_(_/(_ _||   \   ((_|_)) _)((_|_))  ((_|(_|_))  ((_)
+\__ \/ -_|_-<_-< / _ \ ' \)) | | |) | | '_/ -_)\ V // -_)| '_(_-< -_)| '_|
+|___/\___/__/__/_\___/_||_|___||___/  |_| \___| \_/ \___||_| /__|___||_|   v.1.0
+================================================================================
+
+Enter the user ID: 1
+Enter the username: admin
+Enter the user email: ad@min.net 
+Enter the first possible unix timestamp / seqential number: 100
+Enter the last possible unix timestamp / seqential number: 900
+
+Enter the searched SessionID to match: fe5461eac4b068cadcf76b85f6499afc
+
+Found matching session ID: md5("1,admin") == fe5461eac4b068cadcf76b85f6499afc
+```
